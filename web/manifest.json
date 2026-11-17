@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
     "name": "w7_practice",
     "short_name": "w7_practice",
-=======
-    "name": "w7_statefull_widget",
-    "short_name": "w7_statefull_widget",
->>>>>>> 2924668c06840c4e5e559c5f28466c8b1f7dc27f
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
