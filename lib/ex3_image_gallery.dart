@@ -13,27 +13,67 @@ List<String> images = [
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false, // Why this line ? Can you explain it ?
-      home: Scaffold(
-        backgroundColor: Colors.green[50],
-        appBar: AppBar(
-          backgroundColor: Colors.green[400],
-          title: const Text('Image viewer'),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.navigate_before),
-              tooltip: 'Go to the previous image',
-              onPressed: () => {},
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
-              child: IconButton(
-                icon: const Icon(Icons.navigate_next),
-                tooltip: 'Go to the next image',
-                onPressed: () => {},
-              ),
-            ),
-          ],
-        ),
-        body: Image.asset(images[0]),
-      ),
+      home: ImageGallery(),
     ));
+
+class ImageGallery extends StatefulWidget {
+  const ImageGallery({
+    super.key,
+  });
+
+  @override
+  State<ImageGallery> createState() => _ImageGalleryState();
+}
+
+class _ImageGalleryState extends State<ImageGallery> {
+  int imgNumber = 0;
+ 
+  void navigate_next() {
+    setState(() {
+      if (imgNumber <= images.length - 2 ) {
+        imgNumber += 1;
+      }else {
+        imgNumber = images.length - 1;
+      }
+    });
+  }
+
+  void navigate_before() {
+    setState(() {
+      if (imgNumber > 0) {
+        imgNumber -= 1;
+      } else {
+        imgNumber = 0;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.green[50],
+      appBar: AppBar(
+        backgroundColor: Colors.green[400],
+        title: const Text('Image viewer'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.navigate_before),
+            tooltip: 'Go to the previous image',
+            onPressed: navigate_before,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
+            child: IconButton(
+              icon: const Icon(Icons.navigate_next),
+              tooltip: 'Go to the next image',
+              onPressed: navigate_next,
+            ),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Image.asset(images[imgNumber]),
+      )
+    );
+  }
+}

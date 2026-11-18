@@ -11,3 +11,7 @@ dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/w4-s2/
